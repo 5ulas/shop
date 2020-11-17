@@ -17,10 +17,14 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('surname');
+            $table->string('password');
+            $table->string('email');
+            $table->string('phone');
             $table->integer('age');
             $table->string('IBAN');
             $table->string('address');
             $table->string('postal_code');
+            
         });
     }
 
