@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function show($id)
     {
-        $user = User::find($id);
-        return view('employee.profile',  ['user' => $user]);
+        $user = User::findOrFail($id);
+        return view('client.profile',  ['user' => $user]);
     }
 }

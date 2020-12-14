@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
@@ -28,8 +29,12 @@ Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'i
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'getData'])->name('products');
 Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index']);
 Route::get('/product/{id}',[App\Http\Controllers\ProductController::class, 'single']);
-Route::get('user/{id}', [App\Http\Controllers\UserController::class,'show'])->name('profile');
 Route::get('employees/delete/{id}', [App\Http\Controllers\EmployeeController::class,'delete']);
+
+Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
+Route::get('/client/edit/{user}', [App\Http\Controllers\ClientController::class, 'edit'])->name('client.edit');
+Route::patch('/clients/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('client.update');
+
 
 Auth::routes();
 

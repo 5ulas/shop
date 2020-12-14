@@ -28,7 +28,7 @@
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Namai</a>
                         <a href="{{ route('products') }}" class="text-sm text-gray-700 underline">Produktai</a>
                     @else
-                    
+
                         <a href="{{ route('products') }}" class="text-sm text-gray-700 underline">Produktai</a>
 
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Prisijungti</a>
@@ -41,8 +41,10 @@
             @endif
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <h1>Kompiuterinės technikos parduotuvė</h1>
-                </div>
+                <h1>
+                    <img src="/images/logo.png" class="w-100">
+                    <div>Kompiuterinės technikos parduotuvė</div>
+                </h1>
             </div>
         </div>
     </body>

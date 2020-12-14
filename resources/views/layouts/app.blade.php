@@ -46,7 +46,7 @@
         .form-style-6 input[type="time"],
         .form-style-6 input[type="url"],
         .form-style-6 textarea,
-        .form-style-6 select 
+        .form-style-6 select
         {
             -webkit-transition: all 0.30s ease-in-out;
             -moz-transition: all 0.30s ease-in-out;
@@ -79,7 +79,7 @@
             padding: 3%;
             border: 1px solid #43D1AF;
         }
-        
+
         .form-style-6 input[type="submit"],
         .form-style-6 input[type="button"]{
             box-sizing: border-box;
@@ -91,7 +91,7 @@
             border-bottom: 2px solid #30C29E;
             border-top-style: none;
             border-right-style: none;
-            border-left-style: none;	
+            border-left-style: none;
             color: #fff;
         }
         .form-style-6 input[type="submit"]:hover,
@@ -106,7 +106,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <div><img src="/images/logo.png" style="height: 45px; border-right: #1b4b72" class="pr-3">Kompiuterinės technikos parduotuvė</div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -121,11 +121,14 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                            <a href="{{ route('products') }}" class="text-sm text-gray-700 underline">Produktai</a>
+                        </div>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            
+
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -134,14 +137,18 @@
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->username }} <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('profile', ['id' => Auth::user()->id ]) }}">
+
+                                <a class="dropdown-item" href="{{ route('profile.show', ['id' => Auth::user()->id ]) }}">
                                     {{ __('Profilis') }}
                                 </a>
 
+                                <a class="dropdown-item" href="{{ route('client.edit', ['user' => Auth::user()->id]) }}">
+                                    {{ __('Redaguoti profilį') }}
+                                </a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
