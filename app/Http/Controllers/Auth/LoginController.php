@@ -41,7 +41,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         switch ($user->role){
-            case 'client':
+            case 'client' or 'supplier':
                 return redirect()->route('profile.show', ['id' => $user->id ]);
             default:
                 return redirect()->home();
