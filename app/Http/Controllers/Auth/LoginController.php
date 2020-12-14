@@ -40,6 +40,11 @@ class LoginController extends Controller
     }
     protected function authenticated(Request $request, $user)
     {
-        return redirect()->route('profile.show', ['id' => $user->id ]);
+        switch ($user->role){
+            case 'client':
+                return redirect()->route('profile.show', ['id' => $user->id ]);
+            default:
+                return redirect()->home();
+        }
     }
 }

@@ -146,9 +146,18 @@
                                     {{ __('Profilis') }}
                                 </a>
 
-                                <a class="dropdown-item" href="{{ route('client.edit', ['user' => Auth::user()->id]) }}">
-                                    {{ __('Redaguoti profilį') }}
-                                </a>
+                                @switch(Auth::user()->role)
+                                    @case('client')
+                                    <a class="dropdown-item" href="{{ route('client.edit', ['user' => Auth::user()->id]) }}">
+                                        {{ __('Redaguoti kliento profilį') }}
+                                    </a>
+                                    @break
+                                    @case('supplier')
+                                    <a class="dropdown-item" href="{{ route('supplier.edit', ['user' => Auth::user()->id]) }}">
+                                        {{ __('Redaguoti įmonės profilį') }}
+                                    </a>
+                                    @break
+                                @endswitch
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

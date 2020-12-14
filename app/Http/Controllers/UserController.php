@@ -10,6 +10,13 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return view('client.profile',  ['user' => $user]);
+        switch ($user->role){
+            case 'client':
+                return view('client.profile',  ['user' => $user]);
+            case 'supplier':
+                return view('supplier.profile', ['user' => $user]);
+            default:
+                return view('home');
+        }
     }
 }

@@ -32,8 +32,11 @@ Route::get('/product/{id}',[App\Http\Controllers\ProductController::class, 'sing
 Route::get('employees/delete/{id}', [App\Http\Controllers\EmployeeController::class,'delete']);
 
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
+
 Route::get('/client/edit/{user}', [App\Http\Controllers\ClientController::class, 'edit'])->name('client.edit');
-Route::patch('/clients/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('client.update');
+Route::patch('/client/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('client.update');
+Route::get('/supplier/edit/{user}', [App\Http\Controllers\ClientController::class, 'edit'])->name('supplier.edit');
+Route::patch('/supplier/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('supplier.update');
 
 
 Auth::routes();
