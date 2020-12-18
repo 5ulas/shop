@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('client_id');
             $table->timestamps();
 
-            $table->index('client_id');
+            
         });
     }
 

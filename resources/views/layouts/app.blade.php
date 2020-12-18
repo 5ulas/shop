@@ -157,6 +157,19 @@
                                         {{ __('Redaguoti įmonės profilį') }}
                                     </a>
                                     @break
+                                    @case('employee')
+                                    <a class="dropdown-item" href="{{ route('employee.profile', ['id' => Auth::user()->id]) }}">
+                                        {{ __('Darbuotojo profilis') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('employee.edit', ['user' => Auth::user()->id]) }}">
+                                        {{ __('Darbuotojo redagavimas') }}
+                                    </a>
+                                    @break
+                                    @case('manager')
+                                    <a class="dropdown-item" href="{{ route('employees.index', ['user' => Auth::user()->id]) }}">
+                                        {{ __('Darbuotojų profiliai') }}
+                                    </a>
+                                    @break
                                 @endswitch
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"

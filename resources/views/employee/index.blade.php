@@ -7,7 +7,9 @@
 
       <th>Username</th>
 
-      <th>Surname</th>
+      <th>Email</th>
+
+      <th>Rolė</th>
 
     </thead>
 
@@ -16,11 +18,13 @@
 
         <tr>
 
-          <td>{{$user->name}} </td>
+          <td>{{$user->username}} </td>
 
           <td>{{$user->email}} </td>
 
-          <td><a href="{{"/employees" . "/delete" . "/"  . $user->id}}" class="btn btn-xs btn-info pull-right">Ištrynti</a></td>
+          <td>{{$user->role}}</td>
+
+          <td><a href="{{"/employees" . "/delete" . "/"  . $user->id}}" class="btn btn-xs btn-info pull-right">Ištrinti</a></td>
         </tr>
 @endforeach
 

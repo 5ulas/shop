@@ -30,8 +30,13 @@ Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'i
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'getData'])->name('products');
 Route::get('/product/{id}',[App\Http\Controllers\ProductController::class, 'single']);
 
-Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index']);
-Route::get('employees/delete/{id}', [App\Http\Controllers\EmployeeController::class,'delete']);
+Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees.index');
+Route::get('/employees/delete/{id}', [App\Http\Controllers\EmployeeController::class,'delete']);
+Route::get('/employee/{id}', [App\Http\Controllers\EmployeeController::class, 'show'])->name('employee.profile');
+Route::get('/employee/delete/{id}', [App\Http\Controllers\EmployeeController::class, 'deletemyself'])->name('employee.delete');
+Route::get('/employee/{user}', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employee.edit');
+Route::post('/employee/edit/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('employee.update');
+
 
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
 

@@ -15,6 +15,8 @@ class UserController extends Controller
                 return view('client.profile',  ['user' => $user]);
             case 'supplier':
                 return view('supplier.profile', ['user' => $user]);
+            case 'employee' || 'manager':
+                return view('employee.profile', ['user' => $user]);
             default:
                 return view('home');
         }
