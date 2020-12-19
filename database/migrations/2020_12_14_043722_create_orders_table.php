@@ -22,9 +22,11 @@ class CreateOrdersTable extends Migration
             $table->string('delivery_address');
             $table->decimal('discount');
             $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('fees_id')->nullable();
+
             $table->timestamps();
 
-            
         });
     }
 

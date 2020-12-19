@@ -18,6 +18,7 @@ class CreateSubsidiariesTable extends Migration
             $table->string('address');
             $table->double('space');
             $table->string('postal_code');
+            
         });
     }
 

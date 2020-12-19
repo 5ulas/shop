@@ -19,6 +19,8 @@ class CreateWarehousesTable extends Migration
             $table->float('size');
             $table->boolean('special_storing_terms');
             $table->string('postal_code');
+            $table->unsignedBigInteger('subsidiary_id');
+
         });
     }
 

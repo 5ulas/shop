@@ -25,6 +25,7 @@ class CreateEmployeesTable extends Migration
             $table->string('IBAN')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->index('user_id');
+            $table->unsignedBigInteger('subsidiary_id')->nullable();
 
         });
     }

@@ -21,6 +21,8 @@ class CreateFeesTable extends Migration
             $table->string('receiver_IBAN');
             $table->date('period');
             $table->boolean('submitted');
+            $table->unsignedBigInteger('order_id');
+
         });
     }
 
