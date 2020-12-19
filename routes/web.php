@@ -51,6 +51,18 @@ Route::patch('/client/{user}', [App\Http\Controllers\ClientController::class, 'u
 Route::get('/supplier/edit/{user}', [App\Http\Controllers\ClientController::class, 'edit'])->name('supplier.edit');
 Route::patch('/supplier/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('supplier.update');
 
+// Display all
+Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders');
+// Create
+Route::get('/order/create/id/{id}/date/{date}/period/{period}/status/{status}/done/{done}/price/{price}', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
+// Edit single
+Route::get('/order/edit/{id}', [App\Http\Controllers\OrderController::class, 'edit'])->name('orders.edit');
+Route::post('/order/edit', [App\Http\Controllers\OrderController::class, 'update'])->name('orders.edit.post');
+// Remove single
+Route::get('/order/decline/{id}', [App\Http\Controllers\OrderController::class, 'destroy'])->name('orders.destroy');
+// Show single
+Route::get('/order/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('order.single');
+
 
 Auth::routes();
 

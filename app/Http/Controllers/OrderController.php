@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -15,7 +17,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $userId = Auth::id();
+        $orders = Order::where('client_id', $userId)->get();
+        return view('order.index', ['orders' => $orders]);
     }
 
     /**
@@ -23,9 +27,24 @@ class OrderController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($id, $date, $period, $status, $done, $price )
     {
-        //
+        $userId = Auth::id();
+
+        $data = ['id' => $id,
+                'creation_date' => $date,
+                'period' => $period,
+                'status' => $status,
+                'done' => $done,
+                'delivery_address' => 'Adresas',
+                'discount' => '10',
+                'price' => $price,
+                'client_id' => $userId,
+                'employee_id' => 1
+          ]; 
+
+        Order::create($data);
+        return redirect('/orders')->with('mssg', 'Thanks for your order!');
     }
 
     /**
@@ -34,9 +53,9 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+
     }
 
     /**
@@ -45,9 +64,11 @@ class OrderController extends Controller
      * @param Order $order
      * @return Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $order = Order::find($id);
+        error_log($order);
+        return view('order.single',  ['order' => $order]);
     }
 
     /**
@@ -56,9 +77,9 @@ class OrderController extends Controller
      * @param Order $order
      * @return Response
      */
-    public function edit(Order $order)
+    public function edit($id)
     {
-        //
+        return view('order.edit', ['id' => $id]);
     }
 
     /**
@@ -68,9 +89,19 @@ class OrderController extends Controller
      * @param Order $order
      * @return Response
      */
-    public function update(Request $request, Order $order)
+    public function update()
     {
-        //
+        $id = request('id');
+        $order = Order::find($id);
+        $order->status = request('status');
+        $order->done = request('done');
+        $order->discount = request('discount');
+        $order->price = request('price');
+        $order->save();
+
+        $userId = Auth::id();
+        $orders = Order::where('client_id', $userId)->get();
+        return view('order.index', ['orders' => $orders]);
     }
 
     /**
@@ -79,9 +110,13 @@ class OrderController extends Controller
      * @param Order $order
      * @return Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        Order::findOrFail($id)->delete();
+
+        $userId = Auth::id();
+        $orders = Order::where('client_id', $userId)->get();
+        return view('order.index', ['orders' => $orders]);
     }
 
 
@@ -105,8 +140,6 @@ class OrderController extends Controller
             $ord->discount=$dc;
             $ord->price=$nprice;
             $ord->save();
-
-
         }
 
     }

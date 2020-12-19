@@ -41,8 +41,8 @@
                     <td>{{ $data->warranty }}</td>
                     <td>{{ $data->price }}</td>
                     <td>{{ $data->specification }}</td>
-
                     <td><a href="{{"/product" . "/"  . $data->id}}" class="btn btn-xs btn-info pull-right">Plačiau</a></td>
+                    <td><a href="{{"/order/create" . "/id/"  . $data->id . "/date/" . date('Y-m-d') . "/period/" . date('Y-m-d') . "/status/" . "Patvirtintas" . "/done/" . "0" . "/price/" . $data->price }}" class="btn btn-xs btn-info pull-right">Užsakyti</a></td>
                 </tr>
                 @endforeach
             </tbody>
