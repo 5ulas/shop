@@ -29,6 +29,10 @@ Route::post('/product/create', [App\Http\Controllers\ProductController::class, '
 Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'index']);
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'getData'])->name('products');
 Route::get('/product/{id}',[App\Http\Controllers\ProductController::class, 'single']);
+Route::post('/product/{id}',[App\Http\Controllers\ProductController::class, 'remove'])->name('product.remove');
+
+Route::get('/productStats', [App\Http\Controllers\ProductStatsController::class, 'index'])->name('productStats');
+
 
 Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees.index');
 Route::get('/employees/delete/{id}', [App\Http\Controllers\EmployeeController::class,'delete']);

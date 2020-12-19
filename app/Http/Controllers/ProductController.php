@@ -7,42 +7,66 @@ use App\Models\Product;
 class ProductController extends Controller
 {
 
-    public function getData(){
-
-      $products = Product::simplePaginate(15);
-
-      return view('product.all', ['products' => $products]);
+  public function getData()
+  {
+    if (request()->has('sorter')) {
+      switch (request()->get('sorter')) {
+        case "name":
+          $products = Product::orderBy('name', 'desc')->paginate(15);
+          break;
+        case "warranty":
+          $products = Product::orderBy('warranty', 'desc')->paginate(15);
+          break;
+        case "price_descending":
+          $products = Product::orderBy('price', 'desc')->paginate(15);
+          break;
+        case "price_ascending":
+          $products = Product::orderBy('price', 'asc')->paginate(15);
+          break;
+        default:
+          $products = Product::paginate(15);
+          break;
+      }
+    } else {
+      $products = Product::paginate(15);
     }
 
-    public function single($id){
-        $product = Product::find($id);
-        return view('product.single',  ['product' => $product]);
-    }
+    return view('product.all', ['products' => $products]);
+  }
 
+  public function single($id)
+  {
+    $product = Product::find($id);
+    return view('product.single',  ['product' => $product]);
+  }
 
-    public function create() {
+  public function create()
+  {
+    $data = request()->validate([
+      'name' => 'string',
+      'warranty' => 'integer',
+      'description' => 'string',
+      'specification' => 'string',
+      'price' => 'numeric | min:0',
+      'special_storing_terms' => 'boolean',
+      'volume' => 'numeric | min:0',
+      'weight' => 'numeric | min:0'
+    ]);
+    $data['stored_since'] = now();
+    Product::create($data);
+    return redirect('/products')->with('mssg', 'Thanks for your order!');
+  }
 
-      $product = new Product();
+  public function remove($id)
+  {
+    Product::findOrFail($id)->delete();
 
-      $product->name = request('name');
-      $product->warranty = request('warranty');
-      $product->description = request('description');
-      $product->specification = request('specification');
-      $product->stored_since = now();
-      $product->price = request('price');
-      $product->special_storing_terms = request('special_storing_terms');
-      $product->volume = request('volume');
-      $product->weight = request('weight');
+    return redirect('/products')->with('mssg', 'Product was removed');
+  }
 
-      $product->save();
-  
-      return redirect('/products')->with('mssg', 'Thanks for your order!');
-  
-    }
+  public function index()
+  {
 
-    public function index() {
-
-      return view('product.create');
-    }
-    
+    return view('product.create');
+  }
 }

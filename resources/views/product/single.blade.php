@@ -28,7 +28,12 @@
                         <td>{{ $product->stored_since }}</td>
                         <td>{{ $product->volume }}</td>
                         <td>{{ $product->weight }}</td>
-                        
+                        <td>
+                            <form action="{{ route('product.remove', ['id' => $product->id]) }}" method="POST">
+                                @csrf
+                                <input type="submit" value="Ištrinti" />
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>

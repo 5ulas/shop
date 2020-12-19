@@ -25,9 +25,9 @@ class CreateProductsTable extends Migration
             $table->float('volume');
             $table->float('weight');
             $table->unsignedBigInteger('feedback_id')->nullable();
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('warehouse_id');
-            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('order_id')->nullable();
+            $table->unsignedBigInteger('warehouse_id')->nullable();
+            $table->unsignedBigInteger('supplier_id')->nullable();
 
         });
     }

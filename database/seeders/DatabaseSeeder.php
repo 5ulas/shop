@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create();
     	foreach (range(1,30) as $index) {
             DB::table('products')->insert([
-                'name' => $faker->title,
+                'name' => $faker->name,
                 'warranty' => $faker->numberBetween(10, 100),
                 'description' => $faker->sentence,
                 'specification' => $faker->sentence,
