@@ -81,4 +81,5 @@ class EmployeeController extends Controller
 
         return redirect(route('employee.stats', [$ords,$sum,$discounts,$paid]));
     }
+
 }

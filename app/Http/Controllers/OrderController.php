@@ -83,4 +83,31 @@ class OrderController extends Controller
     {
         //
     }
+
+
+    public function discount($amount,$id){
+        if(str_ends_with ($amount,"%")){
+            $perc=substr($amount,0,-1);
+            $ord=Order::where('id',$id)->first();
+            $nprice=$ord->price;
+            $dc=$nprice*$perc;
+            $nprice-=$dc;
+            $ord->discount=$dc;
+            $ord->price=$nprice;
+            $ord->save();
+
+        }
+        else{
+            $ord=Order::where('id',$id)->first();
+            $nprice=$ord->price;
+            $dc=$amount;
+            $nprice-=$dc;
+            $ord->discount=$dc;
+            $ord->price=$nprice;
+            $ord->save();
+
+
+        }
+
+    }
 }

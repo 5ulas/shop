@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('done');
             $table->string('delivery_address');
             $table->decimal('discount');
+            $table->decimal('price');
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('fees_id')->nullable();
