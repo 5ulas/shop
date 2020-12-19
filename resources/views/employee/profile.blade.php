@@ -6,7 +6,8 @@
                 <div class="card-header">Profilis</div>
                 <div class="card-body">
                 <form method="POST" action="{{ route('employee.update', ['user' => Auth::user()]) }}">
-                   
+                    @csrf
+                    @method('PATCH')
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">E-Paštas</label>
                         <div class="col-md-6">

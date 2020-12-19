@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+    protected $table = 'employees';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +24,14 @@ class Employee extends Model
         'statistics',
         'position',
         'salary',
-        'password'
+        'password',
+        'user_id'
     ];
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    
+   
 }

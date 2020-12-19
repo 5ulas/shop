@@ -35,7 +35,7 @@ Route::get('/employees/delete/{id}', [App\Http\Controllers\EmployeeController::c
 Route::get('/employee/{id}', [App\Http\Controllers\EmployeeController::class, 'show'])->name('employee.profile');
 Route::get('/employee/delete/{id}', [App\Http\Controllers\EmployeeController::class, 'deletemyself'])->name('employee.delete');
 Route::get('/employee/{user}', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employee.edit');
-Route::post('/employee/edit/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('employee.update');
+Route::patch('/employee/edit/{user}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('employee.update');
 
 
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('profile.show');

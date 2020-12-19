@@ -47,11 +47,18 @@ class EmployeeController extends Controller
             'surname' => '',
             'age' => 'nullable|integer|between:14,200',
             'IBAN' => '',
-            'email' => '',
-            'telephone' => ''
-
+            
         ]);
-        $user->client()->update($data);
+        $user->employee();
+        // dd($user->employee());
+        // dd($data['age']);
+        
+        $emp = Employee::updateOrCreate(
+            ['user_id'=>$user->id],
+            ['name' => $data['name'], 'surname' => $data['surname'],
+            'age'=>$data['age'],'IBAN'=>$data['IBAN'], 'user_id'=>$user->id]
+        );
+
         return redirect(route('employee.profile', $user->id));
     }
 }
