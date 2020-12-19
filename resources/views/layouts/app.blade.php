@@ -121,9 +121,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                            <a href="{{ route('products') }}" class="text-sm text-gray-700 underline">Produktai</a>
-                        </div>
+                        <li class="nav-item">
+                                <a class="nav-link" href="{{ route('products') }}">{{ __('Products') }}</a>
+                        </li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
