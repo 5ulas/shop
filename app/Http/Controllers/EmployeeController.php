@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Models\Employee;
+use App\Models\Order;
 
 class EmployeeController extends Controller
 {
@@ -60,5 +61,24 @@ class EmployeeController extends Controller
         );
 
         return redirect(route('employee.profile', $user->id));
+    }
+
+    public function statistics($id){
+        $empid=Employee::where('user_id',$id)->first();
+        $ords=Order::where('employee_id',$empid->id)->get();
+        $sum=0;
+        $discounts=0;
+        $paid=0;
+        foreach($ords as $ord){
+            $sum++;
+            $discounts+=$ord->discount;
+            if( !isset($ord->fees_id)){
+                $paid++;
+            }
+
+        }
+        
+
+        return redirect(route('employee.stats', [$ords,$sum,$discounts,$paid]));
     }
 }
