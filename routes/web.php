@@ -52,7 +52,7 @@ Route::get('/supplier/edit/{user}', [App\Http\Controllers\ClientController::clas
 Route::patch('/supplier/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('supplier.update');
 
 // Display all
-Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders');
+Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
 // Create
 Route::get('/order/create/id/{id}/date/{date}/period/{period}/status/{status}/done/{done}/price/{price}', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
 // Edit single
@@ -63,6 +63,13 @@ Route::get('/order/decline/{id}', [App\Http\Controllers\OrderController::class, 
 // Show single
 Route::get('/order/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('order.single');
 
+Route::get('/order/pay/{id}', [App\Http\Controllers\OrderController::class, 'pay'])->name('order.pay');
+
+Route::get('/order/debt/{id}', [App\Http\Controllers\OrderController::class, 'debt'])->name('order.debt');
+
+Route::post('/order/bank', [App\Http\Controllers\OrderController::class, 'bankPay'])->name('order.bank');
+
+Route::get('/order/bank/{id}', [App\Http\Controllers\OrderController::class, 'bank'])->name('order.bank.id');
 
 Auth::routes();
 

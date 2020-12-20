@@ -58,6 +58,56 @@ class OrderController extends Controller
 
     }
 
+     /**
+     * Payment window.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return Response
+     */
+    public function pay($id)
+    {
+        return view('order.pay',  ['id' => $id]);
+    }
+
+    /**
+     * Payment window with bank.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return Response
+     */
+    public function bank($id)
+    {
+        return view('order.bank',  ['id' => $id]);
+    }
+    
+    public function bankPay()
+    {
+        $order = Order::find(request('id'));
+        $order->status = "Apmokėtas";
+        $order->save();
+
+        $userId = Auth::id();
+        $orders = Order::where('client_id', $userId)->get();
+        return view('order.index', ['orders' => $orders])->with('status', 'Apmokėta!');
+    }
+     /**
+     * Payment window in debt.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return Response
+     */
+    public function debt($id)
+    {
+        $order = Order::find($id);
+        $order->status = "Apmokėtas";
+        $order->save();
+
+        $userId = Auth::id();
+        $orders = Order::where('client_id', $userId)->get();
+        return view('order.index', ['orders' => $orders])->with('status', 'Apmokėta!');
+    }
+
+
     /**
      * Display the specified resource.
      *

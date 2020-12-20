@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -122,7 +123,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                                <a class="nav-link" href="{{ route('products') }}">{{ __('Products') }}</a>
+                                <a class="nav-link" href="{{ route('products') }}">{{ __('Produktai') }}</a>
                         </li>
                         @guest
                             <li class="nav-item">
@@ -136,6 +137,11 @@
                             @endif
                         @else
                         <li class="nav-item dropdown">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('orders.index') }}">{{ __('Užsakymai') }}</a>
+                            </li>
+
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->username }} <span class="caret"></span>
                             </a>
