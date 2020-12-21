@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
                 'role' => $faker->randomElement(['client','supplier','employee','manager'])
             ]);
         }
-        $indices = $faker->shuffleArray(range(1, 30));
+        $client_indices = $faker->shuffleArray(range(1, 30));
         foreach (range(1,30) as $index) {
             DB::table('clients')->insert([
                 'name' => $faker->name,
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
                 'iban' => $faker->iban(),
                 'address' => $faker->address,
                 'postal_code' => $faker->postcode,
-                'user_id' => $indices[$index - 1]
+                'user_id' => $client_indices[$index - 1]
             ]);
         }
         $indices = $faker->shuffleArray(range(31, 60));
@@ -57,6 +57,15 @@ class DatabaseSeeder extends Seeder
                 'company_code' => $faker->bothify('*********'),
                 'iban' => $faker->iban(),
                 'user_id' => $indices[$index - 1]
+            ]);
+        }
+        $indices = $faker->shuffleArray(range(1, 30));
+        foreach (range(1,30) as $index) {
+            DB::table('feedback')->insert([
+                'comment' => $faker->sentence,
+                'rating' => $faker->randomFloat(2, 1,5),
+                'product_id' => $indices[$index - 1],
+                'client_id' => $indices[$index - 1]
             ]);
         }
     }
