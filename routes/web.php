@@ -30,7 +30,6 @@ Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'i
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'getData'])->name('products');
 Route::get('/product/{id}',[App\Http\Controllers\ProductController::class, 'single']);
 Route::post('/product/{id}',[App\Http\Controllers\ProductController::class, 'remove'])->name('product.remove');
-
 Route::get('/productStats', [App\Http\Controllers\ProductStatsController::class, 'index'])->name('productStats');
 
 
@@ -51,6 +50,10 @@ Route::patch('/client/{user}', [App\Http\Controllers\ClientController::class, 'u
 Route::get('/supplier/edit/{user}', [App\Http\Controllers\ClientController::class, 'edit'])->name('supplier.edit');
 Route::patch('/supplier/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('supplier.update');
 
+Route::get('/feedbacks/{product_id}', [App\Http\Controllers\FeedbackController::class, 'show'])->name('feedbacks.show');
+Route::get('/feedbacks/create/{product_id}', [App\Http\Controllers\FeedbackController::class, 'create_view'])->name('feedbacks.create_view');
+Route::post('/feedbacks/create/{product_id}', [App\Http\Controllers\FeedbackController::class, 'create'])->name('feedbacks.create');
+
 // Display all
 Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
 // Create
@@ -62,13 +65,9 @@ Route::post('/order/edit', [App\Http\Controllers\OrderController::class, 'update
 Route::get('/order/decline/{id}', [App\Http\Controllers\OrderController::class, 'destroy'])->name('orders.destroy');
 // Show single
 Route::get('/order/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('order.single');
-
 Route::get('/order/pay/{id}', [App\Http\Controllers\OrderController::class, 'pay'])->name('order.pay');
-
 Route::get('/order/debt/{id}', [App\Http\Controllers\OrderController::class, 'debt'])->name('order.debt');
-
 Route::post('/order/bank', [App\Http\Controllers\OrderController::class, 'bankPay'])->name('order.bank');
-
 Route::get('/order/bank/{id}', [App\Http\Controllers\OrderController::class, 'bank'])->name('order.bank.id');
 
 Auth::routes();

@@ -28,12 +28,24 @@
                         <td>{{ $product->stored_since }}</td>
                         <td>{{ $product->volume }}</td>
                         <td>{{ $product->weight }}</td>
-                        <td>
-                            <form action="{{ route('product.remove', ['id' => $product->id]) }}" method="POST">
-                                @csrf
-                                <input type="submit" value="Ištrinti" />
-                            </form>
-                        </td>
+                        @if(Auth::check())
+                            @if(Auth::user()->role == 'employee' || Auth::user()->role == 'manager')
+                            <td>
+                                <form action="{{ route('product.remove', ['id' => $product->id]) }}" method="POST">
+                                    @csrf
+                                    <input type="submit" value="Ištrinti" />
+                                </form>
+                            </td>
+                            @endif
+                            @if(Auth::user()->role == 'client')
+                            <td>
+                                <form action="{{ route('feedbacks.show', ['product_id' => $product->id]) }}" method="GET">
+                                    @csrf
+                                    <input type="submit" value="Atsiliepimai" />
+                                </form>
+                            </td>
+                            @endif
+                        @endif
                     </tr>
                 </tbody>
             </table>

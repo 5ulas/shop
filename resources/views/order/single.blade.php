@@ -26,6 +26,35 @@
                         <th scope="row">{{ $order->delivery_address }}</th>
                         <th scope="row">{{ $order->discount }}</th>
                         <th scope="row">{{ $order->price }}</th>
+                        <table class="table table-bordered mb-5">
+                            <thead>
+                            <tr class="table-success">
+                                <th scope="col">Prekės kodas</th>
+                                <th scope="col">Pavadinimas</th>
+                                <th scope="col">Garantija</th>
+                                <th scope="col">Kaina</th>
+                                <th scope="col">Specifikacija</th>
+                                <th scope="col">Atsiliepti</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($products as $data)
+                                <tr>
+                                    <th scope="row">{{ $data->id }}</th>
+                                    <th scope="row">{{ $data->name }}</th>
+                                    <th scope="row">{{ $data->warranty }}</th>
+                                    <th scope="row">{{ $data->price }}</th>
+                                    <th scope="row">{{ $data->specification }}</th>
+                                    <th scope="row">
+                                        <form action="{{ route('feedbacks.create_view', ['product_id' => $data->id]) }}" method="GET">
+                                            @csrf
+                                            <input type="submit" value="Atsiliepimai" />
+                                        </form>
+                                    </th>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </tr>
                 </tbody>
             </table>

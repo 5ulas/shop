@@ -23,4 +23,7 @@ class Order extends Model
         'employee_id',
         'fees_id'
     ];
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

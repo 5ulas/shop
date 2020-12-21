@@ -16,8 +16,9 @@ class CreateFeedbackTable extends Migration
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
             $table->float('rating');
-            $table->boolean('returned');
-            $table->string('comment');
+            $table->string('comment')->nullable();
+            $table->foreignId('product_id')->references('id')->on('products');
+            $table->foreignId('client_id')->references('id')->on('clients');
         });
     }
 

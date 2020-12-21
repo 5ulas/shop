@@ -24,11 +24,10 @@ class CreateProductsTable extends Migration
             $table->boolean('special_storing_terms');
             $table->float('volume');
             $table->float('weight');
-            $table->unsignedBigInteger('feedback_id')->nullable();
             $table->unsignedBigInteger('order_id')->nullable();
             $table->unsignedBigInteger('warehouse_id')->nullable();
             $table->unsignedBigInteger('supplier_id')->nullable();
-
+            $table->index('order_id');
         });
     }
 

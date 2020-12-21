@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -31,7 +32,7 @@ class OrderController extends Controller
     {
         $userId = Auth::id();
 
-        $data = ['id' => $id,
+        $data = [
                 'creation_date' => $date,
                 'period' => $period,
                 'status' => $status,
@@ -41,21 +42,13 @@ class OrderController extends Controller
                 'price' => $price,
                 'client_id' => $userId,
                 'employee_id' => 1
-          ]; 
-
-        Order::create($data);
+          ];
+        $product = Product::findOrFail($id);
+        $order = $product->order()->create($data);
+        $product->update(['order_id' => $order->id]);
+        $product->save();
+        $order->save();
         return redirect('/orders')->with('mssg', 'Thanks for your order!');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Response
-     */
-    public function store($id)
-    {
-
     }
 
      /**
@@ -79,7 +72,7 @@ class OrderController extends Controller
     {
         return view('order.bank',  ['id' => $id]);
     }
-    
+
     public function bankPay()
     {
         $order = Order::find(request('id'));
@@ -118,7 +111,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         error_log($order);
-        return view('order.single',  ['order' => $order]);
+        return view('order.single',  ['order' => $order, 'products' => Product::where('order_id', $order->id)->get()]);
     }
 
     /**
