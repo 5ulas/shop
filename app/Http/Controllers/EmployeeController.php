@@ -79,7 +79,7 @@ class EmployeeController extends Controller
         }
         
 
-        return redirect(route('employee.stats', [$ords,$sum,$discounts,$paid]));
+        return view('employee.stats', ['ords'=>$ords,'sum'=>$sum,'discounts'=>$discounts,'paid'=>$paid]);
     }
 
 }

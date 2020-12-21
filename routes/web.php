@@ -41,6 +41,7 @@ Route::get('/employee/delete/{id}', [App\Http\Controllers\EmployeeController::cl
 Route::get('/employee/{user}', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employee.edit');
 Route::patch('/employee/edit/{user}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('employee.update');
 Route::get('/employee/statistics/{id}', [App\Http\Controllers\EmployeeController::class, 'statistics'])->name('employee.statistics');
+Route::get('/order/discount', [App\Http\Controllers\OrderController::class, 'discount'])->name('order.discount');
 
 
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('profile.show');

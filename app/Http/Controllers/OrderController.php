@@ -17,9 +17,25 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id();
-        $orders = Order::where('client_id', $userId)->get();
-        return view('order.index', ['orders' => $orders]);
+        switch($role=Auth::user()->role):
+        case('client'):
+            $userId = Auth::id();
+            $orders = Order::where('client_id', $userId)->get();
+            return view('order.index', ['orders' => $orders]);
+            break;
+        case('employee'):
+            $orders=Order::all();
+            return view('order.index',['orders'=>$orders]);
+            break;
+        case('manager'):
+            $orders=Order::all();
+            return view('order.index',['orders'=>$orders]);
+            break;
+        default:
+            $orders=Order::all();
+            return view('order.index',['orders'=>$orders]);
+            break;
+        endswitch;
     }
 
     /**
@@ -170,14 +186,21 @@ class OrderController extends Controller
     }
 
 
-    public function discount($amount,$id){
+    public function discount(){
+        $amount=request('amount');
+        $id=request('hidden_id');
         if(str_ends_with ($amount,"%")){
             $perc=substr($amount,0,-1);
             $ord=Order::where('id',$id)->first();
             $nprice=$ord->price;
-            $dc=$nprice*$perc;
+            $dc=(float)$nprice*(float)$perc/100;
             $nprice-=$dc;
-            $ord->discount=$dc;
+            if(!isset($ord->discount)){
+                $ord->discount=$dc;
+            }
+            else{
+                $ord->discount+=$dc;
+            }
             $ord->price=$nprice;
             $ord->save();
 
@@ -185,12 +208,17 @@ class OrderController extends Controller
         else{
             $ord=Order::where('id',$id)->first();
             $nprice=$ord->price;
-            $dc=$amount;
+            $dc=(float)$amount;
             $nprice-=$dc;
-            $ord->discount=$dc;
+            if(!isset($ord->discount)){
+                $ord->discount=$dc;
+            }
+            else{
+                $ord->discount+=$dc;
+            }
             $ord->price=$nprice;
             $ord->save();
         }
-
+        return redirect('/orders');
     }
 }
