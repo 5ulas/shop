@@ -37,15 +37,13 @@
                                 </form>
                             </td>
                             @endif
-                            @if(Auth::user()->role == 'client')
-                            <td>
-                                <form action="{{ route('feedbacks.show', ['product_id' => $product->id]) }}" method="GET">
-                                    @csrf
-                                    <input type="submit" value="Atsiliepimai" />
-                                </form>
-                            </td>
-                            @endif
                         @endif
+                        <td>
+                            <form action="{{ route('feedbacks.show', ['product_id' => $product->id]) }}" method="GET">
+                                @csrf
+                                <input type="submit" value="Atsiliepimai" />
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>

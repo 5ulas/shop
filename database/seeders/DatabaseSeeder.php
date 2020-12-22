@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
                 'comment' => $faker->sentence,
                 'rating' => $faker->randomFloat(2, 1,5),
                 'product_id' => $indices[$index - 1],
-                'client_id' => $indices[$index - 1]
+                'user_id' => $indices[$index - 1]
             ]);
         }
     }

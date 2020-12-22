@@ -8,21 +8,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Feedback extends Model
 {
-    public $timestamps = false;
-
     use HasFactory;
     protected $fillable = [
         'rating',
         'comment',
-        'client_id',
-        'product_id'
+        'product_id',
+        'user_id'
     ];
     function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
-    function client(): BelongsTo
+    function user(): BelongsTo
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
     }
 }

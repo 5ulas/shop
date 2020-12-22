@@ -12,6 +12,7 @@
                         <table class="table table-bordered mb-5">
                             <thead>
                             <tr class="table-success">
+                                <th scope="col">Vartotojo vardas</th>
                                 <th scope="col">Reitingas</th>
                                 <th scope="col">Komentaras</th>
                             </tr>
@@ -19,6 +20,7 @@
                             <tbody>
                             @foreach($feedbacks as $data)
                                 <tr>
+                                    <th scope="row">{{ $data->user->username }}</th>
                                     <th scope="row">{{ $data->rating }}</th>
                                     <th scope="row">{{ $data->comment }}</th>
                                 </tr>

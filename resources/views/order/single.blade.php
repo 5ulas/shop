@@ -48,7 +48,7 @@
                                     <th scope="row">
                                         <form action="{{ route('feedbacks.create_view', ['product_id' => $data->id]) }}" method="GET">
                                             @csrf
-                                            <input type="submit" value="Atsiliepimai" />
+                                            <input type="submit" value="Atsiliepti" />
                                         </form>
                                     </th>
                                 </tr>

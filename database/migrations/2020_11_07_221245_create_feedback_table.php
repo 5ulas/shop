@@ -17,8 +17,9 @@ class CreateFeedbackTable extends Migration
             $table->id();
             $table->float('rating');
             $table->string('comment')->nullable();
+            $table->timestamps();
             $table->foreignId('product_id')->references('id')->on('products');
-            $table->foreignId('client_id')->references('id')->on('clients');
+            $table->foreignId('user_id')->references('id')->on('users');
         });
     }
 

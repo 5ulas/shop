@@ -4,22 +4,46 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                <a href="{{ route('products') }}" class="text-sm text-gray-700 underline">Produktai</a>
-            </div>
-            <div class="card">
-                <div class="card-header"></div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('Prisijungusio vartotojo ekranas') }}
+            <form style="padding-top: 1%" action={{ route('products') }}>
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" style="width: 80%" class="btn btn-primary">
+                            {{ __('Prekės') }}
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
+            <form style="padding-top: 1%" action={{ route('orders.index') }}>
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" style="width: 80%" class="btn btn-primary">
+                            {{ __('Užsakymai') }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+            @if(Auth::check())
+            <form style="padding-top: 1%" action={{ route('profile.show', ['id' => Auth::id()]) }}>
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" style="width: 80%" class="btn btn-primary">
+                            {{ __('Profilis') }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+                @if(Auth::user()->role == 'client')
+                    <form style="padding-top: 1%" action={{ route('client.statistics') }}>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" style="width: 80%" class="btn btn-primary">
+                                    {{ __('Statistika') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                @endif
+            @endif
         </div>
     </div>
 </div>

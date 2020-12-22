@@ -44,9 +44,11 @@ Route::get('/order/discount', [App\Http\Controllers\OrderController::class, 'dis
 
 
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
+Route::post('/user/delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('user.delete');
 
 Route::get('/client/edit/{user}', [App\Http\Controllers\ClientController::class, 'edit'])->name('client.edit');
 Route::patch('/client/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('client.update');
+Route::get('/client/statistics', [App\Http\Controllers\ClientController::class, 'statistics'])->name('client.statistics');
 
 Route::get('/supplier/edit/{user}', [App\Http\Controllers\ClientController::class, 'edit'])->name('supplier.edit');
 Route::patch('/supplier/{user}', [App\Http\Controllers\ClientController::class, 'update'])->name('supplier.update');

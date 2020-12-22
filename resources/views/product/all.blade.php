@@ -5,10 +5,10 @@
 <body>
 
     <div class="container mt-5">
-
+        @if(Auth::check())
         <a style="margin-bottom: 50px " href="{{"/product/create"}}" class="btn btn-xs btn-info pull-right">Naujas</a>
         <a style="margin-bottom: 50px " href="{{ route('productStats')}}" class="btn btn-xs btn-info pull-right">Statistika</a>
-
+        @endif
         <form action="{{ route('products')}}" method="GET">
             <div class="toolbar-sorter">
                 <span>Sort By</span>

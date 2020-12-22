@@ -146,7 +146,7 @@
                                 {{ Auth::user()->username }} <span class="caret"></span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right" style="padding-right: 15%" aria-labelledby="navbarDropdown">
 
                                 <a class="dropdown-item" href="{{ route('profile.show', ['id' => Auth::user()->id ]) }}">
                                     {{ __('Profilis') }}
@@ -157,6 +157,9 @@
                                     <a class="dropdown-item" href="{{ route('client.edit', ['user' => Auth::user()->id]) }}">
                                         {{ __('Redaguoti kliento profilį') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('client.statistics') }}">
+                                        {{ __('Statistika') }}
+                                    </a>
                                     @break
                                     @case('supplier')
                                     <a class="dropdown-item" href="{{ route('supplier.edit', ['user' => Auth::user()->id]) }}">
@@ -166,12 +169,12 @@
                                     @case('employee')
                                     <a class="dropdown-item" href="{{ route('employee.profile', ['id' => Auth::user()->id]) }}">
                                         {{ __('Darbuotojo profilis') }}
-                                    </a>                                   
+                                    </a>
                                     @break
                                     @case('manager')
                                     <a class="dropdown-item" href="{{ route('employee.profile', ['id' => Auth::user()->id]) }}">
                                         {{ __('Darbuotojo profilis') }}
-                                    </a>    
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('employees.index', ['user' => Auth::user()->id]) }}">
                                         {{ __('Darbuotojų profiliai') }}
                                     </a>

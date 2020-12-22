@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -19,6 +20,18 @@ class UserController extends Controller
                 return view('employee.profile', ['user' => $user]);
             default:
                 return view('home');
+        }
+    }
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        \Auth::logout();
+        try {
+            $user->delete();
+        } catch (\Exception $e) {
+            return \redirect('home');
+        } finally {
+            return \redirect('home');
         }
     }
 }

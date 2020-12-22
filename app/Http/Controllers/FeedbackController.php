@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Feedback;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Auth;
 
 class FeedbackController extends Controller
@@ -15,7 +14,7 @@ class FeedbackController extends Controller
             'rating' => 'required|numeric|between:1,5',
             'comment' => 'nullable|string'
         ]);
-        $data['client_id'] = Auth::user()->client->id;
+        $data['user_id'] = Auth::user()->id;
         $data['product_id'] = $product_id;
         Feedback::create($data);
         return redirect(route('products'));

@@ -60,11 +60,30 @@
                             <p id="email" class="form-control">{{$user->username}} </p>
                         </div>
                     </div>
-                    <form action={{ route('client.edit', ['user' => Auth::user()->id]) }}>
+                    <form style="padding-top: 1%" action={{ route('client.edit', ['user' => Auth::user()->id]) }}>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     Redaguoti profilį
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <form style="padding-top: 1%" action={{ route('password.request') }}>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Pamiršote slaptažodį?') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <form style="padding-top: 1%" method="POST" action={{ route('user.delete', ['id' => Auth::id()]) }}>
+                        @csrf
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-danger">
+                                    {{ __('Ištrinti abonementą?') }}
                                 </button>
                             </div>
                         </div>
